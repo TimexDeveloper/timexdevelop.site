@@ -1,0 +1,251 @@
+html {
+    image-rendering: pixelated;
+    scroll-behavior: smooth;
+}
+@font-face {
+    font-family: 'Altarska';
+    src:url('../assets/Fonts/altarfont.otf');
+}
+body {
+    text-align: center;
+    display: block;
+    overflow-y: auto;
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+p,h1,h2,h3,h4,h5,h6,th,td,span,li,ruby,small,big,b,i,u,s,em {
+    color:var(--fontcolor);
+}
+p,a,h1,h2,h3,h4,h5,h6,ruby,small,big,b,i,u,s,em {
+    margin: 16px 0;
+}
+a {
+    text-decoration: none;
+    color: var(--fontcolor2);
+}
+a > * {
+    color:var(--fontcolor2);
+}
+hr {
+    margin:8px 0;
+    border-width: 0;
+    box-shadow: -64px 0 64px -48px #000000 inset, 64px 0 64px -48px #000000 inset;
+    height: 2px;
+}
+ul,li {
+    list-style: none;
+}
+@keyframes scan {
+    from {
+        background-position: 0 0;
+    }
+    to {
+        background-position: var(--scanx) var(--scany);
+    }
+}
+@keyframes float {
+    50% {
+        transform: translateY(var(--floaty));
+    }
+    0%,100% {
+        transform: translateY( calc(var(--floaty) * -1));
+    }
+}
+@keyframes shake {
+    0% {
+
+    }
+    10% {
+
+    }
+    20% {
+
+    }
+    30% {
+
+    }
+    40% {
+        
+    }
+    50% {
+
+    }
+    60% {
+
+    }
+    70% {
+
+    }
+    80% {
+
+    }
+    90% {
+
+    }
+    100% {
+
+    }
+}
+/*This filter only on black objects(scanlines or other.), else it's going cmyk.*/
+.red {
+	filter: invert(10%) sepia(100%) saturate(7000%) hue-rotate(360deg) brightness(100%) contrast(100%);
+}
+.green {
+	filter: invert(70%) sepia(100%) saturate(4500%) hue-rotate(90deg) brightness(100%) contrast(100%);
+}
+.blue {
+	filter: invert(10%) sepia(100%) saturate(7000%) hue-rotate(240deg) brightness(100%) contrast(100%);
+}
+.white {
+	filter: invert(1) saturate(100%) brightness(100%) contrast(100%);
+}
+/*Scanline style*/
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    background-image: var(--scanimg);
+    animation: scan 2s linear infinite;
+}
+/*.overlay{--scanimg: url(/assets/images/scanline.png);--scanx: 0;--scany: 12px;}
+.overlay#2{--scanimg: url(/assets/images/scanline2.png);--scanx: 0;--scany: 10px;}
+.overlay#3{--scanimg: url(/assets/images/scanline3.png);--scanx: -20px;--scany: 16px;}
+.overlay#4{--scanimg: url(/assets/images/scanline4.png);--scanx: -40px;--scany: 20px;}
+.overlay#5{--scanimg: url(/assets/images/scanline5.png);--scanx: 0;--scany: 24px;}
+.overlay#6{--scanimg: url(/assets/images/scanline6.png);--scanx:0;--scany:8px;}
+.overlay#7{--scanimg: url(/assets/images/scanline7.png);--scanx:0;--scany:16px;}
+*/
+.altarska {
+    font-family: 'Altarska';
+}
+.flipped {
+    transform: scaleX(-1);
+}
+.box {
+    position: relative;
+    background-color: rgba(0, 0, 0, 0.9);
+    z-index: 20;
+    width: 800px;
+    left:50%;
+    transform: translateX(-50%);
+    box-shadow: rgba(0, 0, 0, 0.5) 3px 3px 8px 3px;
+}
+.centered {
+    left:50%;
+    transform: translateX(-50%);
+}
+::selection {
+    background-color: rgba(0, 0, 0, 0);
+}
+.tip {
+    border-bottom: dashed 1px #f5deb3;
+}
+#definition-box {
+    position: fixed;
+    top: 0;
+    left: 0;
+    max-width: 40vw;
+    z-index: 30;
+    transform: 
+        translate(
+            calc(  (var(--x) * 1px)   +   ((var(--xFlip) * (100% + 2em)) + 1em)  ), 
+            calc(  (var(--y) * 1px)   +   ((var(--yFlip) * (100% + 2em)) + 1em)  )
+        );
+    pointer-events: none;
+    transition: opacity 0.5s ease-in-out;
+    background: rgb(0, 0, 0);
+    color: #ffffff;
+    padding: 10px;
+    font-size: 12px;
+    line-height: 1.5em;
+    border: 1px solid #ffffff;
+}
+#definition-box:not(.active) {
+    opacity: 0;
+}
+.groovytext {
+    animation: groovy infinite linear var(--groovylenght);
+}
+@keyframes groovy {
+    from {
+        text-shadow:
+            4px -4px 0 var(--groovycolor),
+            3px -3px 0 var(--groovycolor),
+            2px -2px 0 var(--groovycolor),
+            1px -1px 0 var(--groovycolor),
+            -4px 4px 0 var(--groovycolor2),
+            -3px 3px 0 var(--groovycolor2),
+            -2px 2px 0 var(--groovycolor2),
+            -1px 1px 0 var(--groovycolor2);
+    }
+    25% {
+        text-shadow:
+            -4px -4px 0 var(--groovycolor2),
+            -3px -3px 0 var(--groovycolor2),
+            -2px -2px 0 var(--groovycolor2),
+            -1px -1px 0 var(--groovycolor2),
+            4px 4px 0 var(--groovycolor),
+            3px 3px 0 var(--groovycolor),
+            2px 2px 0 var(--groovycolor),
+            1px 1px 0 var(--groovycolor);
+    }
+    50% {
+        text-shadow:
+            -4px 4px 0 var(--groovycolor),
+            -3px 3px 0 var(--groovycolor),
+            -2px 2px 0 var(--groovycolor),
+            -1px 1px 0 var(--groovycolor),
+            4px -4px 0 var(--groovycolor2),
+            3px -3px 0 var(--groovycolor2),
+            2px -2px 0 var(--groovycolor2),
+            1px -1px 0 var(--groovycolor2);
+    }
+    75% {
+        text-shadow:
+            4px 4px 0 var(--groovycolor2),
+            3px 3px 0 var(--groovycolor2),
+            2px 2px 0 var(--groovycolor2),
+            1px 1px 0 var(--groovycolor2),
+            -4px -4px 0 var(--groovycolor),
+            -3px -3px 0 var(--groovycolor),
+            -2px -2px 0 var(--groovycolor),
+            -1px -1px 0 var(--groovycolor);
+    }
+    to {
+        text-shadow:
+            4px -4px 0 var(--groovycolor),
+            3px -3px 0 var(--groovycolor),
+            2px -2px 0 var(--groovycolor),
+            1px -1px 0 var(--groovycolor),
+            -4px 4px 0 var(--groovycolor2),
+            -3px 3px 0 var(--groovycolor2),
+            -2px 2px 0 var(--groovycolor2),
+            -1px 1px 0 var(--groovycolor2);
+    }
+}
+table {
+    position: relative;
+    min-width: 600px;
+    left:50%;
+    transform: translateX(-50%);
+    border-collapse: collapse;
+}
+:root {
+    --groovycolor: black;
+    --groovycolor2: white;
+}
+.observer {
+    position: absolute;
+    background-image: url(assets/images/Carpet.png);
+    background-size: 100%;
+    width: 1024px;
+    height:1024px;
+    border-radius: 50%;
+    z-index: 99;
+}

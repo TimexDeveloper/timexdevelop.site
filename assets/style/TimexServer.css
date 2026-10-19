@@ -1,0 +1,19 @@
+/* Цвет для текста */
+h1,h2,p {
+    color:white;
+}
+a {
+    color:hsl(0,0%,70%);
+}
+/* Тут курсор меняется при наведение на ссылку */
+a:hover {
+    cursor:pointer;
+}
+/* Окно текста, там может быть всё */
+.box {
+    border:solid black 2px;
+}
+/* hr это линия, отделение текста */
+hr {
+    background:repeating-linear-gradient(to left,black,white,black);
+}

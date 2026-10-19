@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Более-менее важные компоненты -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Название страницы -->
+    <title>Example</title>
+    <!-- Подключение стилей -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="assets/style/TimexServer.css">
+    <!-- Подключение скриптов -->
+    <script src="howler.js"></script>
+    <script src="main.js"></script>
+</head>
+<body>
+    <style>
+        /* .background это айди в котором ширина и высота 100%, в бэкграунде url для ссылки на картину. position: absolute(или fixed); нужен чтобы картинка показалась а то relative говно.
+        background-size устанавливает размер бэкграунда в 100% на x и y, чтобы картинка не повторялась. */
+        .background {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: url('/assets/images/Угроза.jpg');
+            background-size: 100% 100%;
+        }
+    </style>
+    <!-- Фон -->
+    <div class="background"></div>
+    <!-- Окно текста с опущением вниз на 100 пикселей -->
+    <div class="box" style="top:100px;">
+        <hr>
+        <h1>Example title</h1>
+        <p>Example text</p>
+        <a onclick="goto('https://www.youtube.com/watch?v=dQw4w9WgXcQ')" target="_blank">Example link</a>
+        <hr>
+    </div>
+    <!-- Это скрипт на проигрывание звука - музыки (ссылка, повтор, громкость, скорость) -->
+    <script>
+    // Функция автоматического «разблокирования» звука после первого взаимодействия
+    function initAutoplay() {
+        // Запускаем воспроизведение
+        let ae = AudioPlay('/assets/Audio/lament.mp3', true, 1, 1);
+        
+        // Удаляем слушатели, чтобы музыка не запускалась повторно при последующих кликах
+        document.removeEventListener('click', initAutoplay);
+        document.removeEventListener('keydown', initAutoplay);
+    }
+
+    // Слушаем первое действие пользователя на странице
+    document.addEventListener('click', initAutoplay);
+    document.addEventListener('keydown', initAutoplay);
+    </script>
+
+    <!-- ВАЖНО чтобы ты запустил через live-server, а то звук не будет проигрываться автоматически -->
+</body>
+</html>
